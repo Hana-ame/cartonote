@@ -9,3 +9,5 @@ coverage/
 
 # deploy artifacts
 dist/
+.npmrc
+.pages-tmp/
