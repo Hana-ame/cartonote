@@ -18,27 +18,21 @@ The app is fully client-side (no backend, no API key required); notes are persis
 
 ## Deploy to GitHub Pages
 
-The site is served from the `gh-pages` branch (project site under `/cartonote/`).
-`vite.config.ts` sets `base: './'`, so the build works from any sub-path.
+Deployment is fully handled by GitHub Actions — nothing is built locally.
 
-To publish an update:
+- Workflow: `.github/workflows/deploy.yml` (`Build` → `Deploy`)
+- Trigger: every push to `main`, or manually from the **Actions** tab (`workflow_dispatch`)
+- Pages source: **GitHub Actions** (not a branch), so no `gh-pages` branch is maintained
 
-```bash
-./deploy.sh "your commit message"
-```
-
-Or manually:
+To publish an update, just push:
 
 ```bash
-npm run build
-rm -rf .pages-tmp && mkdir .pages-tmp && cp -r dist/. .pages-tmp/
-touch .pages-tmp/.nojekyll
-cd .pages-tmp && git init -b gh-pages && git add -A && git commit -m "Deploy"
-git remote add origin https://github.com/Hana-ame/cartonote.git
-git push -f origin gh-pages
+git add -A && git commit -m "your change" && git push origin main
 ```
 
-`.nojekyll` is required so GitHub Pages serves the `assets/` directory verbatim.
+The workflow installs dependencies with `npm ci`, builds with Vite, adds `dist/.nojekyll`,
+uploads the `dist` folder as a Pages artifact and deploys it. `vite.config.ts` sets
+`base: './'`, so the same build works from the `/cartonote/` sub-path.
 
 ## Structure
 
