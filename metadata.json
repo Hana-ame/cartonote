@@ -1,0 +1,6 @@
+{
+  "name": "CartoNote — Infinite Map & Spatial Note Canvas",
+  "description": "An infinite draggable cartographic canvas for spatial note-taking, waypoint pinning, route linking, and visual knowledge mapping.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
